@@ -43,5 +43,8 @@
     "vite": "^5.3.5",
     "vite-plugin-mkcert": "^1.17.5"
   },
+  "resolutions": {
+    "rollup": "4.24.0"
+  },
   "packageManager": "yarn@4.3.1"
 }

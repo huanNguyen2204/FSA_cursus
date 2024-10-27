@@ -1,0 +1,11 @@
+{
+  "admin": {
+    "color": {
+      "mainColor": "#16a34a",
+      "sub1Color": "#22c55e",
+      "sub2Color": "#34d399"
+    },
+    "borderColor": "#e5e5e5",
+    "titleColor": "#9ca3af"
+  }
+}

@@ -1,0 +1,16 @@
+/* Tailwind config */
+/* Discomment bellow and keep on this line to enable tailwindcss */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background-color: #F6F6F6;
+}
+
+/* Hidden outline when focus input */
+input:focus {
+  outline: none;
+}

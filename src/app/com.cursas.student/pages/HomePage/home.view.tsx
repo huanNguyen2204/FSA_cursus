@@ -16,11 +16,11 @@ const HomeView = () => {
    *
    * funcs
    *
-   * **/
+   * **/ 
   const _onClickOpenFilter = () => {
     setIsOpenFilter(!isOpenFilter);
-    console.log(isOpenFilter);
   };
+
 
   /**
    *

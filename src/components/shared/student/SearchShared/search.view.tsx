@@ -17,7 +17,6 @@ const SearchView = () => {
   const handleKeyUp = (event: any) => {
     event.preventDefault();
     if (event.key == 'Enter') {
-      console.log('Enter press');
     }
   };
 

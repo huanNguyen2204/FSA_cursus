@@ -21,7 +21,7 @@ const LoginView = () => {
           <div className="w-full h-max flex flex-col ">
             <div className="w-full h-max flex items-center space-x-1 ">
               <PersonOutlineOutlinedIcon sx={{ fontSize: 15 }} />
-              <label className='font-medium text-md'>Username</label>
+              <label className='font-medium text-md'>Username ok</label>
             </div>
             <input 
               className='w-full h-[35px] border-[2px] px-2 rounded-sm

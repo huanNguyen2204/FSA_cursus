@@ -13,7 +13,7 @@ const LearnView = () => {
         {/* Video */}
         <div className="flex xl:w-3/4 h-max flex-col space-y-4">
           {/* Clip */}
-          <div className="flex w-full xl:h-[40rem] h-[20rem] bg-black">
+          <div className="flex w-full xl:h-[40rem] h-[20rem] bg-black shadow-xl">
             <video className="w-full h-full" controls>
               <source src={jsVideo} className="w-full h-full" type="video/mp4" />
             </video>

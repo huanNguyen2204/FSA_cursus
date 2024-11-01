@@ -1,5 +1,5 @@
 import { INSTRUCTOR_URL, INSTRUCTOR_SUBLIST, INSTRUCTOR_FIRSTCOME, LayoutInstructorPage } from "@/app/com.cursus.instructor/settings/setting.app";
-import { STUDENT_URL, STUDENT_SUBLIST, STUDENT_FIRSTCOME, LayoutStudentPage } from "@/app/com.cursas.student/settings/setting.app";
+import { STUDENT_URL, STUDENT_OTHERLIST, STUDENT_SUBLIST, STUDENT_FIRSTCOME, LayoutStudentPage } from "@/app/com.cursas.student/settings/setting.app";
 
 import { RouterModel } from "@/models/router.model";
 
@@ -24,8 +24,14 @@ const ENV_SUBLIST: RouterModel[] = [
   ...STUDENT_SUBLIST
 ]
 
+// Setting otherList:
+const ENV_OTHERLIST: RouterModel[] = [
+  ...STUDENT_OTHERLIST
+]
+
 export {
   ENV_SUBLIST,
+  ENV_OTHERLIST,
   ENV_URL,
   ENV_LAYOUT,
   ENV_FIRSTCOME

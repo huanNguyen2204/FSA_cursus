@@ -10,9 +10,22 @@ import DetailPage from "../pages/DetailPage/detail.page";
 import ProfilePage from "../pages/ProfilePage/profile.page";
 import ShoppingCartPage from "../pages/ShoppingCartPage/shoppingCart.page";
 import LearnPage from "../pages/LearnPage/learn.page";
+import RegisterPage from "../pages/RegisterPage/register.page";
 
 // Str for url router
 const STUDENT_URL = "/cursus-student";
+
+// Router from other sublist
+const STUDENT_OTHERLIST: RouterModel[] = import.meta.env.VITE_APP != "com.cursus.student" ? [] : [
+  {
+    url: STUDENT_URL + "/register" ,
+    page: <RegisterPage />,
+  },
+  {
+    url: STUDENT_URL + "/login",
+    page: <LoginPage />
+  }
+]
 
 // Router sub list
 const STUDENT_SUBLIST: RouterModel[] = import.meta.env.VITE_APP != "com.cursus.student" ? [] : [
@@ -45,12 +58,14 @@ const STUDENT_SUBLIST: RouterModel[] = import.meta.env.VITE_APP != "com.cursus.s
 
 // Router at first come
 const STUDENT_FIRSTCOME: RouterModel | null = import.meta.env.VITE_APP != "com.cursus.student" ? null : {
-  url: STUDENT_URL + "/login",
-  page: <LoginPage />
+  url: STUDENT_URL + "/layout" + "/",
+  page: <HomePage />,
+  title: "Home"
 }
 
 export {
   STUDENT_URL,
+  STUDENT_OTHERLIST,
   STUDENT_SUBLIST,
   STUDENT_FIRSTCOME,
   LayoutPage as LayoutStudentPage

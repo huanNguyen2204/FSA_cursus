@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import LoginView from "./login.view"
+import RegisterView from "./register.view"
 import { useEffect } from "react";
 import { STUDENT_URL } from "../../settings/setting.app";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   /**
    * 
    * states
@@ -24,7 +24,7 @@ const LoginPage = () => {
     }
   }, [])
   
-  return <LoginView />
+  return <RegisterView />
 }
 
-export default LoginPage;
+export default RegisterPage

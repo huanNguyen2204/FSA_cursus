@@ -1,7 +1,7 @@
 import CartItemView from "./cartItem.view"
 
-const CartItemShared = () => {
-  return <CartItemView />
+const CartItemShared = (props: any) => {
+  return <CartItemView {...props} />
 }
 
 export default CartItemShared;

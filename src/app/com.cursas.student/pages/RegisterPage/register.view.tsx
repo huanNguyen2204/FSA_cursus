@@ -86,6 +86,7 @@ const RegisterView = () => {
     setIsLoading(true);
 
     const data = {
+      email,
       fullName: fullname,
       username,
       password,
@@ -102,6 +103,11 @@ const RegisterView = () => {
       context.setTypeOfAlert('error');
       context.setTitleOfAlert('The password and confirm password not same');
       setIsLoading(false);
+    } else if (!email.includes("@gmail.com")) {
+      context.handleOpenAlert();
+      context.setTypeOfAlert('error');
+      context.setTitleOfAlert('The email must have @gmail.com');
+      setIsLoading(false);
     } else {
       try {
         await axios.post(apiUrl.accountController.register, data);
@@ -110,6 +116,8 @@ const RegisterView = () => {
         context.handleOpenAlert();
         context.setTypeOfAlert('success');
         context.setTitleOfAlert('Create new account successful');
+        
+        navigate("/cursus-student/login")
 
         setIsLoading(false);
       } catch (error: any) {
@@ -117,7 +125,7 @@ const RegisterView = () => {
         context.handleOpenAlert();
         context.setTypeOfAlert('error');
         context.setTitleOfAlert(error.response.data.error.username);
-
+      
         setIsLoading(false);
       }
     }
@@ -146,9 +154,11 @@ const RegisterView = () => {
           onSubmit={_onClickSubmitRegister}
         >
           {/* Logo */}
-          <div className="w-[13rem]">
+          <button type='button' className="w-[13rem]"
+          onClick={() => navigate("/cursus-student/layout")}
+          >
             <img className="pointer-events-none" src={shortLogo} alt="Cursus Online" />
-          </div>
+          </button>
           {/* End logo */}
 
           {/* Username and password */}
@@ -176,7 +186,7 @@ const RegisterView = () => {
             {/* End fullname */}
 
             {/* Email */}
-            <div className="w-full h-max flex-col hidden">
+            <div className="w-full h-max flex-col">
               <div className="w-full h-max flex items-center space-x-1 ">
                 <EmailOutlinedIcon sx={{ fontSize: 15 }} />
                 <label className="font-medium text-md">Email</label>
@@ -185,6 +195,7 @@ const RegisterView = () => {
                 className="w-full h-[35px] border-[2px] px-2 rounded-sm
               focus:ring-1 focus:ring-emerald-600
               "
+                required
                 value={email}
                 onChange={(e: any) => _onChangeValue(e, 'email')}
                 placeholder="Enter email"

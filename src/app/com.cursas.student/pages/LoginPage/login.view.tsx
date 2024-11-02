@@ -108,9 +108,11 @@ const LoginView = () => {
           onSubmit={_onClickSubmit}
         >
           {/* Logo */}
-          <div className="w-[13rem]">
+          <button type='button' className="w-[13rem]"
+            onClick={() => navigate("/cursus-student/layout")}
+          >
             <img className="pointer-events-none" src={shortLogo} alt="Cursus Online" />
-          </div>
+          </button>
           {/* End logo */}
 
           {/* Username and password */}

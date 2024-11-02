@@ -7,7 +7,8 @@ import logo from '@/assets/logo.png';
 import SearchShared from '@/components/shared/student/SearchShared/search.shared';
 import { useNavigate } from 'react-router';
 import { STUDENT_URL } from '../../settings/setting.app';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AppContext } from '@/App';
 
 const HeaderView = () => {
   /**
@@ -15,6 +16,7 @@ const HeaderView = () => {
    * states
    *
    * **/
+  const context = useContext(AppContext)
   const navigate = useNavigate();
 
   const [useInfor, setUserInfor] = useState<any>(undefined);
@@ -82,7 +84,10 @@ const HeaderView = () => {
                   className="w-[2rem] h-[2rem] text-gray-400  hover:text-emerald-600 transition-colors delay-0
               hover:underline
             "
-                  onClick={() => navigate(STUDENT_URL + '/login')}
+                  onClick={() => {
+                    context.setTypeOfDialog("logout");
+                    context.handleOpenDialog();
+                  }}
                 >
                   Logout
                 </button>

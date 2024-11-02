@@ -16,6 +16,7 @@
     "@mui/material": "^6.1.4",
     "axios": "^1.7.7",
     "react": "^18.3.1",
+    "react-avatar-editor": "^13.0.2",
     "react-dom": "^18.3.1",
     "react-router": "^6.27.0",
     "react-router-dom": "^6.27.0"
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/react": "^18.3.3",
+    "@types/react-avatar-editor": "^13",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",

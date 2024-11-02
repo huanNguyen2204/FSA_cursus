@@ -31,7 +31,7 @@ const ShoppingCartView = () => {
               <p className="text-gray-400">Programming language</p>
               <p className="text-xl font-semibold">$99.90</p>
 
-              <button className="w-max text-red-500 hover:underline">
+              <button className="w-max text-red-500 text-xs hover:underline">
                 <p>Remove</p>
               </button>
             </div>
@@ -56,7 +56,7 @@ const ShoppingCartView = () => {
               </p>
               <p className="text-gray-400">Programming language</p>
               <p className="text-xl font-semibold">$99.90</p>
-              <button className="w-max text-red-500 hover:underline">
+              <button className="w-max text-red-500 text-xs hover:underline">
                 <p>Remove</p>
               </button>
             </div>

@@ -4,7 +4,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import { useNavigate } from 'react-router';
 
-const CartItemView = () => {
+const CartItemView = (props: any) => {
   const navigate = useNavigate();
 
   return (
@@ -29,19 +29,19 @@ const CartItemView = () => {
             className="text-lg font-semibold overflow-hidden text-ellipsis"
             style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}
           >
-            Javascript something of a programming language asdlklas dlkla sd
+            {props?.name}
           </p>
           {/* End title */}
 
           {/* Category */}
           <div className="w-full h-max">
-            <p className="text-xs truncate text-gray-400">Programming language</p>
+            <p className="text-xs truncate text-gray-400">{props?.account?.fullName}</p>
           </div>
           {/* End category */}
 
           {/* Price */}
           <div className="w-full h-max">
-            <p className="text-base font-semibold truncate text-black">$99.90</p>
+            <p className="text-base font-semibold truncate text-black">${props?.price}</p>
           </div>
           {/* End price */}
 

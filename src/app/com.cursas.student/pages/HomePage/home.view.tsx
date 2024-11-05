@@ -17,6 +17,7 @@ const LoadingJSX = [
   <LoadingSkeletonShared />
 ];
 
+
 const HomeView = () => {
   /**
    *

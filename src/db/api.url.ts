@@ -1,5 +1,7 @@
-import accountController from "./detail/accountController";
+import accountUrl from "./detail/accountUrl";
+import courseUrl from "./detail/courseUrl";
 
 export const apiUrl = {
-  accountController
+  accountUrl,
+  courseUrl
 }

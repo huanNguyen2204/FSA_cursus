@@ -1,11 +1,38 @@
 import js from '@/assets/js.png';
 
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const CartItemView = (props: any) => {
+  /**
+   * 
+   * states
+   * 
+   * **/
+  const [categoryStr, setCategoryStr] = useState<string>("");
   const navigate = useNavigate();
+
+  /**
+   * 
+   * hooks
+   * 
+   * **/
+  useEffect(() => {
+    if (props?.categories?.length !== 0) {
+      let rsStr = "";
+      
+      for (let i=0; i<props?.categories?.length;i++) {
+        if (i == props?.categories?.length - 1) {
+          rsStr += `${props?.categories[i].categoryName}.`
+        } else {
+          rsStr += `${props?.categories[i].categoryName}, `
+        }
+      }
+
+      setCategoryStr(rsStr);
+    }
+  }, [])
+
 
   return (
     <div
@@ -13,7 +40,7 @@ const CartItemView = (props: any) => {
       border-[1.5px] border-slate-400 hover:border-emerald-600 hover:shadow-md transition-all delay-0 bg-white hover:bg-emerald-100
     "
 
-      onClick={() => navigate("/cursus-student/layout/detail")}
+      onClick={() => navigate(`/cursus-student/layout/detail/${props?.courseId}`)}
     >
       {/* Image */}
       <div className="w-full h-[10rem]">
@@ -34,8 +61,8 @@ const CartItemView = (props: any) => {
           {/* End title */}
 
           {/* Category */}
-          <div className="w-full h-max">
-            <p className="text-xs truncate text-gray-400">{props?.account?.fullName}</p>
+          <div className="w-full h-max truncate">
+            <p className="text-xs truncate text-gray-400">{categoryStr}</p>
           </div>
           {/* End category */}
 
@@ -45,31 +72,11 @@ const CartItemView = (props: any) => {
           </div>
           {/* End price */}
 
-          {/* Add to cart and buy now */}
+          {/* Author */}
           <div className="w-max h-max absolute bottom-0 right-0 space-x-2 flex">
-            {/* Add to cart */}
-            <button
-              className="
-                flex items-center space-x-1 text-gray-500 hover:underline
-              "
-            >
-              <AddShoppingCartIcon sx={{ fontSize: 15 }} />
-              <p>Add to cart</p>
-            </button>
-            {/* End add to cart */}
-
-            {/* Buy now */}
-            <button
-              className="
-                flex items-center space-x-0 text-emerald-600 hover:underline
-              "
-            >
-              <AttachMoneyOutlinedIcon sx={{ fontSize: 15 }} />
-              <p>Buy now</p>
-            </button>
-            {/* Buy now */}
+          <p className='text-gray-500 italic underline'>{props?.account?.fullName}</p>
           </div>
-          {/* End add to cart and buy now */}
+          {/* End author */}
         </div>
       </div>
       {/* End content */}

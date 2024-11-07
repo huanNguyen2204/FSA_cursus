@@ -110,7 +110,7 @@ const RegisterView = () => {
       setIsLoading(false);
     } else {
       try {
-        await axios.post(apiUrl.accountController.register, data);
+        await axios.post(apiUrl.accountUrl.register, data);
 
         // set toastify
         context.handleOpenAlert();

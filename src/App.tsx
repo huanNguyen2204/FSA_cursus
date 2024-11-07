@@ -75,6 +75,7 @@ const App = () => {
       typeOfDialog,
       setTypeOfDialog,
       handleOpenDialog,
+      handleCloseDialog,
       diaLogProps,
       handleParamsDialog
     }}>  

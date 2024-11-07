@@ -1,9 +1,49 @@
 import js from '@/assets/js.png';
+import { apiUrl } from '@/db/api.url';
+import { appUtils } from '@/utils/_appUtils';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 const DetailView = () => {
+  /**
+   *
+   * states
+   *
+   * **/
+  const { courseId } = useParams();
+  const [courseDetail, setCourseDetail] = useState<any>(undefined);
+
+  /**
+   *
+   * hooks
+   *
+   * **/
+  useEffect(() => {
+    const url = apiUrl.courseUrl.detail + courseId;
+
+    const callAPI = async () => {
+      try {
+        const res = await axios.get(
+          url,
+          {
+            headers: {
+              'Accept': '*/*',
+              'Content-Type': 'application/json',
+            }
+          }
+        )
+        setCourseDetail(res.data.payload);
+      } catch (error) {
+      }
+    }
+
+    callAPI();
+  }, []);
+
   return (
     <div
       className="w-full h-max flex bg-white p-4 

@@ -2,6 +2,8 @@
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
+import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 
 import logo from '@/assets/logo.png';
 import SearchShared from '@/components/shared/student/SearchShared/search.shared';
@@ -16,7 +18,7 @@ const HeaderView = () => {
    * states
    *
    * **/
-  const context = useContext(AppContext)
+  const context = useContext(AppContext);
   const navigate = useNavigate();
 
   const [useInfor, setUserInfor] = useState<any>(undefined);
@@ -64,6 +66,25 @@ const HeaderView = () => {
             {/* <button className="w-[2rem] h-[2rem] text-gray-400 hover:text-emerald-600 transition-colors delay-0">
               <NotificationsNoneOutlinedIcon sx={{ fontSize: 30 }} />
             </button> */}
+            {useInfor ? (
+              <>
+                <button
+                  className="w-[2rem] h-[2rem] text-gray-400  hover:text-emerald-600 transition-colors delay-0"
+                  onClick={() => navigate('/cursus-student/layout/shopping-cart')}
+                >
+                  <BookOutlinedIcon sx={{ fontSize: 30 }} />
+                </button>
+
+                <button
+                  className="w-[2rem] h-[2rem] text-gray-400  hover:text-emerald-600 transition-colors delay-0"
+                  onClick={() => navigate('/cursus-student/layout/shopping-cart')}
+                >
+                  <ReceiptOutlinedIcon sx={{ fontSize: 30 }} />
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
 
             <button
               className="w-[2rem] h-[2rem] text-gray-400  hover:text-emerald-600 transition-colors delay-0"
@@ -85,7 +106,7 @@ const HeaderView = () => {
               hover:underline
             "
                   onClick={() => {
-                    context.setTypeOfDialog("logout");
+                    context.setTypeOfDialog('logout');
                     context.handleOpenDialog();
                   }}
                 >

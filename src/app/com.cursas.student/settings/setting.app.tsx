@@ -35,7 +35,7 @@ const STUDENT_SUBLIST: RouterModel[] = import.meta.env.VITE_APP != "com.cursus.s
     title: "Home"
   },
   {
-    url: STUDENT_URL + "/layout" + "/detail" ,
+    url: STUDENT_URL + "/layout" + "/detail/:courseId" ,
     page: <DetailPage />,
     title: "Detail"
   },

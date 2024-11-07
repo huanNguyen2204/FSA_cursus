@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
  *
  * **/
 import LogoutDiagLogShared from './types/LogoutDialogShared/logoutDialog.shared';
+import LoadingDiagGlobalShared from './types/LoadingDialogGlobalShared/loadingDialogGlobal.shared';
 
 const theme = createTheme({
   components: {
@@ -22,7 +23,7 @@ const theme = createTheme({
 });
 
 export default function DialogView(props: any) {
-  /**   
+  /**
    *
    * funcs
    *
@@ -39,13 +40,23 @@ export default function DialogView(props: any) {
    *
    * **/
   const DialogJSX = () => {
-    return <>{props.typeOfDialog === 'logout' ? <LogoutDiagLogShared {...props} /> : <></>}</>;
+    return (
+      <>
+        {props.typeOfDialog === 'logout' ? (
+          <LogoutDiagLogShared {...props} />
+        ) : props.typeOfDialog === 'loading' ? (
+          <LoadingDiagGlobalShared {...props} />
+        ) : (
+          <></>
+        )}
+      </>
+    );
   };
 
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <Dialog
+        <Dialog 
           open={props.openDialog}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"

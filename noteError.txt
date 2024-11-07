@@ -1,0 +1,2 @@
+1. API with Authen cannot called from other url
+=> adding all API need to call with JWT to ENDPOINT_WHITELIST

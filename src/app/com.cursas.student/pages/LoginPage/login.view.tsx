@@ -71,7 +71,7 @@ const LoginView = () => {
      *
      * **/
     try {
-      const res = await axios.post(apiUrl.accountController.login, data);
+      const res = await axios.post(apiUrl.accountUrl.login, data);
 
       if (res.data.payload.role !== 'STUDENT') {
         context.handleOpenAlert();
@@ -90,7 +90,7 @@ const LoginView = () => {
     } catch (error: any) {
       context.handleOpenAlert();
       context.setTypeOfAlert('error');
-      context.setTitleOfAlert(error.response.data.message === "Bad credentials" ? "Password is wrong" : error.response.data.message);
+      context.setTitleOfAlert(error?.response?.data?.message === "Bad credentials" ? "Password is wrong" : error?.response?.data?.message);
       setIsLoading(false);
     }
   };

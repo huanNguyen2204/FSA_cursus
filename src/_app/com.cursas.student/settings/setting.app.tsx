@@ -11,6 +11,8 @@ import ProfilePage from "../pages/ProfilePage/profile.page";
 import ShoppingCartPage from "../pages/ShoppingCartPage/shoppingCart.page";
 import LearnPage from "../pages/LearnPage/learn.page";
 import RegisterPage from "../pages/RegisterPage/register.page";
+import PaymentHistoryPage from "../pages/PaymentHistoryPage/paymentHistory.page";
+import MyCoursePage from "../pages/MyCoursePage/myCourse.page";
 
 // Str for url router
 const STUDENT_URL = "/cursus-student";
@@ -38,6 +40,16 @@ const STUDENT_SUBLIST: RouterModel[] = import.meta.env.VITE_APP != "com.cursus.s
     url: STUDENT_URL + "/layout" + "/detail/:courseId" ,
     page: <DetailPage />,
     title: "Detail"
+  },
+  {
+    url: STUDENT_URL + "/layout" + "/payment-history" ,
+    page: <PaymentHistoryPage />,
+    title: "Payment History"
+  },
+  {
+    url: STUDENT_URL + "/layout" + "/my-course" ,
+    page: <MyCoursePage />,
+    title: "My Course"
   },
   {
     url: STUDENT_URL + "/layout" + "/profile" ,

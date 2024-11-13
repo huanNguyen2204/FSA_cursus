@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
  * **/
 import LogoutDiagLogShared from './types/LogoutDialogShared/logoutDialog.shared';
 import LoadingDiagGlobalShared from './types/LoadingDialogGlobalShared/loadingDialogGlobal.shared';
+import PurchaseConfirmDiaglogShared from './types/PurchaseConfirmDiaglogShared/purchaseConfirmDiaglog.shared';
 
 const theme = createTheme({
   components: {
@@ -46,6 +47,8 @@ export default function DialogView(props: any) {
           <LogoutDiagLogShared {...props} />
         ) : props.typeOfDialog === 'loading' ? (
           <LoadingDiagGlobalShared {...props} />
+        ) : props.typeOfDialog === 'purchase' ? (
+          <PurchaseConfirmDiaglogShared {...props} />
         ) : (
           <></>
         )}
@@ -56,7 +59,7 @@ export default function DialogView(props: any) {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <Dialog 
+        <Dialog
           open={props.openDialog}
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"

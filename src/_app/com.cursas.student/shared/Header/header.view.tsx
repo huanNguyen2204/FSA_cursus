@@ -11,8 +11,9 @@ import { useNavigate } from 'react-router';
 import { STUDENT_URL } from '../../settings/setting.app';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '@/App';
+import Badge from '@mui/material/Badge';
 
-const HeaderView = () => {
+const HeaderView = (_props: any) => {
   /**
    *
    * states
@@ -70,14 +71,14 @@ const HeaderView = () => {
               <>
                 <button
                   className="w-[2rem] h-[2rem] text-gray-400  hover:text-emerald-600 transition-colors delay-0"
-                  onClick={() => navigate('/cursus-student/layout/shopping-cart')}
+                  onClick={() => navigate('/cursus-student/layout/my-course')}
                 >
                   <BookOutlinedIcon sx={{ fontSize: 30 }} />
                 </button>
 
                 <button
                   className="w-[2rem] h-[2rem] text-gray-400  hover:text-emerald-600 transition-colors delay-0"
-                  onClick={() => navigate('/cursus-student/layout/shopping-cart')}
+                  onClick={() => navigate('/cursus-student/layout/payment-history')}
                 >
                   <ReceiptOutlinedIcon sx={{ fontSize: 30 }} />
                 </button>
@@ -90,7 +91,9 @@ const HeaderView = () => {
               className="w-[2rem] h-[2rem] text-gray-400  hover:text-emerald-600 transition-colors delay-0"
               onClick={() => navigate('/cursus-student/layout/shopping-cart')}
             >
-              <ShoppingCartOutlinedIcon sx={{ fontSize: 30 }} />
+              <Badge badgeContent={context.badgeCart} color="success">
+                <ShoppingCartOutlinedIcon sx={{ fontSize: 30 }} />
+              </Badge>
             </button>
 
             {useInfor ? (

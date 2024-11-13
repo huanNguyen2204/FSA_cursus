@@ -7,7 +7,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useNavigate } from 'react-router';
 import { STUDENT_URL } from '../../settings/setting.app';
 import { useContext, useState } from 'react';
-import { apiUrl } from '@/db/api.url';
+import { apiUrl } from '@/api/api.url';
 import axios from 'axios';
 import { AppContext } from '@/App';
 

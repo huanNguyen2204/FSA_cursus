@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:8080",
   "name": "core-reactjs-vitejs-typescript",
   "private": true,
   "version": "0.0.0",

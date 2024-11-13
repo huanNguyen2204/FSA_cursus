@@ -1,7 +1,7 @@
 import LayoutView from "./layout.view"
 import { useContext, useEffect } from "react";
 import axios from "axios";
-import { apiUrl } from "@/db/api.url";
+import { apiUrl } from "@/api/api.url";
 import { AppContext } from "@/App";
 
 const LayoutPage = () => {

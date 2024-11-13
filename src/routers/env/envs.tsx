@@ -1,5 +1,5 @@
-import { INSTRUCTOR_URL, INSTRUCTOR_SUBLIST, INSTRUCTOR_FIRSTCOME, LayoutInstructorPage } from "@/app/com.cursus.instructor/settings/setting.app";
-import { STUDENT_URL, STUDENT_OTHERLIST, STUDENT_SUBLIST, STUDENT_FIRSTCOME, LayoutStudentPage } from "@/app/com.cursas.student/settings/setting.app";
+import { INSTRUCTOR_URL, INSTRUCTOR_SUBLIST, INSTRUCTOR_FIRSTCOME, LayoutInstructorPage } from "@/_app/com.cursus.instructor/settings/setting.app";
+import { STUDENT_URL, STUDENT_OTHERLIST, STUDENT_SUBLIST, STUDENT_FIRSTCOME, LayoutStudentPage } from "@/_app/com.cursas.student/settings/setting.app";
 
 import { RouterModel } from "@/models/router.model";
 

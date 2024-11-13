@@ -14,7 +14,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useContext, useState } from 'react';
 import axios from 'axios';
 
-import { apiUrl } from '@/db/api.url';
+import { apiUrl } from '@/api/api.url';
 import { AppContext } from '@/App';
 
 import Stack from '@mui/material/Stack';

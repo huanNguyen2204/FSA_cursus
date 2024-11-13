@@ -1,50 +1,48 @@
-import js from '@/assets/js.png';
+import defaultCourse from "@/assets/default-course.png"
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const CartItemView = (props: any) => {
   /**
-   * 
+   *
    * states
-   * 
+   *
    * **/
-  const [categoryStr, setCategoryStr] = useState<string>("");
+  const [categoryStr, setCategoryStr] = useState<string>('');
   const navigate = useNavigate();
 
   /**
-   * 
+   *
    * hooks
-   * 
+   *
    * **/
   useEffect(() => {
     if (props?.categories?.length !== 0) {
-      let rsStr = "";
-      
-      for (let i=0; i<props?.categories?.length;i++) {
+      let rsStr = '';
+
+      for (let i = 0; i < props?.categories?.length; i++) {
         if (i == props?.categories?.length - 1) {
-          rsStr += `${props?.categories[i].categoryName}.`
+          rsStr += `${props?.categories[i].categoryName}.`;
         } else {
-          rsStr += `${props?.categories[i].categoryName}, `
+          rsStr += `${props?.categories[i].categoryName}, `;
         }
       }
 
       setCategoryStr(rsStr);
     }
-  }, [])
-
+  }, []);
 
   return (
     <div
       className="w-full h-max flex flex-col cursor-pointer
       border-[1.5px] border-slate-400 hover:border-emerald-600 hover:shadow-md transition-all delay-0 bg-white hover:bg-emerald-100
     "
-
       onClick={() => navigate(`/cursus-student/layout/detail/${props?.courseId}`)}
     >
       {/* Image */}
       <div className="w-full h-[10rem]">
-        <img className="pointer-events-none h-full w-full" src={js} />
+        <img className="pointer-events-none h-full w-full" src={props?.image ? props?.image : defaultCourse} />
       </div>
       {/* End image */}
 
@@ -74,7 +72,7 @@ const CartItemView = (props: any) => {
 
           {/* Author */}
           <div className="w-max h-max absolute bottom-0 right-0 space-x-2 flex">
-          <p className='text-gray-500 italic underline'>{props?.account?.fullName}</p>
+            <p className="text-gray-500 italic underline">{props?.account?.fullName}</p>
           </div>
           {/* End author */}
         </div>

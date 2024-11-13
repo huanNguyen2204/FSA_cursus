@@ -24,6 +24,10 @@ const App = () => {
   const [typeOfDialog, setTypeOfDialog] = useState<string>("");
   const [paramsDiaglog, setParamsDialog] = useState<any>();
 
+  // badge cart header
+  const [badgeCart, setBadgeCart] = useState<number>(0);
+  const [listOfCart, setListOfCart] = useState<any>(undefined);
+
   /**
    * 
    * funcs
@@ -77,7 +81,13 @@ const App = () => {
       handleOpenDialog,
       handleCloseDialog,
       diaLogProps,
-      handleParamsDialog
+      handleParamsDialog,
+
+      // cart
+      badgeCart,
+      listOfCart,
+      setBadgeCart,
+      setListOfCart
     }}>  
       {/* Page components */}
       <div className="flex xl:text-sm text-xs">

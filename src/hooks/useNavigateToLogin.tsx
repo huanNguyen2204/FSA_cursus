@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { STUDENT_URL } from '@/app/com.cursas.student/settings/setting.app';
+import { STUDENT_URL } from '@/_app/com.cursas.student/settings/setting.app';
 import { useContext } from 'react';
 import { AppContext } from '@/App';
 

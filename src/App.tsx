@@ -3,7 +3,6 @@ import { createContext, useState } from "react";
 import Routers from "./routers/router";
 import SnackBarShared from "./components/shared/student/SnackBarShared/snackBar.shared";
 import DialogShared from "./components/shared/student/DialogShared/diaLog.shared";
-
 // create the context 
 export const AppContext = createContext<any>(null);
 
@@ -28,11 +27,12 @@ const App = () => {
   const [badgeCart, setBadgeCart] = useState<number>(0);
   const [listOfCart, setListOfCart] = useState<any>(undefined);
 
-  /**
-   * 
-   * funcs
-   * 
-   * **/
+  // category
+  const [filter, setFilter] = useState<any>({
+    category: 0,
+    courseName: ""
+  });
+  const [isChangeFilter, setIsChangeFilter] = useState<boolean>(false);
 
   // alert funcs
   const handleOpenAlert = () => setOpenAlert(true);
@@ -87,7 +87,15 @@ const App = () => {
       badgeCart,
       listOfCart,
       setBadgeCart,
-      setListOfCart
+      setListOfCart,
+
+      // category
+      filter,
+      setFilter,
+
+      // filter
+      isChangeFilter,
+      setIsChangeFilter,
     }}>  
       {/* Page components */}
       <div className="flex xl:text-sm text-xs">

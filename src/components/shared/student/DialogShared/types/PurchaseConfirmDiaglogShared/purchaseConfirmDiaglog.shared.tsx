@@ -11,22 +11,22 @@ import { AppContext } from '@/App';
 
 const PurchaseConfirmDiaglogShared = (props: any) => {
   /**
-   * 
+   *
    * states
-   * 
+   *
    * **/
   const context = useContext(AppContext);
 
   /**
-   * 
+   *
    * funcs
-   * 
+   *
    * **/
   const _onClickConfirmPurchase = async () => {
     context.setTypeOfDialog('loading');
     context.handleOpenDialog();
-    
-    const userInfor = localStorage.getItem("userInfor");
+
+    const userInfor = localStorage.getItem('userInfor');
 
     if (userInfor !== null) {
       const accountId = JSON.parse(userInfor).id;
@@ -34,24 +34,37 @@ const PurchaseConfirmDiaglogShared = (props: any) => {
       const token = getTokenUtil();
 
       try {
-        await axios.post(
-          url,
-          {
+        await axios
+          .post(url, {
             headers: {
-              'Accept': '*/*',
+              Accept: '*/*',
               'Content-Type': 'application/json',
-              'Authorization': token
+              Authorization: token,
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              context.setBadgeCart(0);
+              context.setListOfCart([]);
+              context.setTitleOfAlert('Congratulations! Your purchase is successful');
+              context.setTypeOfAlert('success');
+              context.handleOpenAlert();
+              context.handleCloseDialog();
+            } else {
+              context.setTitleOfAlert('Purchase faild');
+              context.setTypeOfAlert('error');
+              context.handleOpenAlert();
+              context.handleCloseDialog();
             }
-          }
-        )
-        .then(res => {
-          console.log(res);
-        })
+          });
       } catch (_error) {
-
+        context.setTitleOfAlert('Purchase faild');
+        context.setTypeOfAlert('error');
+        context.handleOpenAlert();
+        context.handleCloseDialog();
       }
     }
-  }
+  };
 
   return (
     <>
@@ -61,9 +74,7 @@ const PurchaseConfirmDiaglogShared = (props: any) => {
           <DialogContentText id="alert-dialog-description">Are you sure to purchase shopping-cart</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={_onClickConfirmPurchase} sx={{ color: '#16a34a' }}
-            
-          >
+          <Button onClick={_onClickConfirmPurchase} sx={{ color: '#16a34a' }}>
             Yes
           </Button>
           <Button onClick={props.handleCloseDialog} sx={{ color: 'gray' }}>

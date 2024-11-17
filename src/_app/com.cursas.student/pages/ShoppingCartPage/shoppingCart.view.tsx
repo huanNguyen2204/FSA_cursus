@@ -1,4 +1,5 @@
 import Divider from '@mui/material/Divider';
+import courseDefault from "@/assets/default-course.png";
 
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import React, { useContext, useEffect, useState } from 'react';
@@ -83,7 +84,7 @@ const ShoppingCartView = () => {
                   <div className="flex w-full h-[9rem] py-1">
                     {/* Img */}
                     <div className="w-[10rem] h-full flex justify-start items-center">
-                      <img className="w-full h-full" src={item?.image} />
+                      <img className="w-full h-full" src={item?.image ? item?.image : courseDefault} />
                     </div>
                     {/* End img */}
 
@@ -135,9 +136,9 @@ const ShoppingCartView = () => {
 
           <button
             className={`w-full h-[50px] flex space-x-1 justify-center items-center transition-all delay-0
-            ${context.listOfCart?.length === 0 ? 'bg-gray-300 text-white' : 'text-white hover:bg-emerald-500 bg-emerald-600'} 
+            ${context.listOfCart?.length === 0 || context?.listOfCart === undefined ? 'bg-gray-300 text-white' : 'text-white hover:bg-emerald-500 bg-emerald-600'} 
           `}
-            disabled={context.listOfCart?.length === 0}
+            disabled={context.listOfCart?.length === 0 || context?.listOfCart === undefined}
             onClick={() => {
               context.setTypeOfDialog('purchase');
               context.handleOpenDialog();

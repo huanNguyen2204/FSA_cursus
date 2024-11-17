@@ -5,5 +5,6 @@ import getTokenUtil from "./shared/getTokenUtil"
 export const appUtils = {
   getAccessToken,
   getTokenUtil,
-  getCheckCourseToCartUtil
+  getCheckCourseToCartUtil,
+  formatDateTimeUtil
 }

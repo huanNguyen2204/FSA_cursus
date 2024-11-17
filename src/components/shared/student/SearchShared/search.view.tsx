@@ -1,5 +1,6 @@
+import { AppContext } from '@/App';
 import SearchIcon from '@mui/icons-material/Search';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 const SearchView = () => {
   /**
@@ -7,7 +8,9 @@ const SearchView = () => {
    * states
    * 
    * **/
+  const context = useContext(AppContext);
   const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [text, setText] = useState<string>("");
 
   /**
    * 
@@ -55,10 +58,26 @@ const SearchView = () => {
         {/* Input fields */}
         <input 
           className='w-[calc(100%-3rem)] h-full rounded-none text-lg'
+          value={text}
+          onChange={(e: any) => {
+            e.preventDefault();
+            setText(e.target.value)
+          }}
         />
         {/* End input fields */}
       </div>
       {/* End input */}
+
+      <button className='w-max h-[3rem] bg-gray-500 hover:bg-gray-400 px-3 text-white'
+        onClick={() => {
+          context.setFilter((prev: any) => ({
+            ...prev,
+            courseName: text
+          }))
+        }}
+      >
+        Search
+      </button>
     </div>
   )
 }

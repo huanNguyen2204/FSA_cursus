@@ -1,5 +1,5 @@
 import { AppContext } from '@/App';
-import js from '@/assets/js.png';
+import defaultCourse from '@/assets/default-course.png';
 import { apiUrl } from '@/api/api.url';
 import getAddToCartUtil from '@/utils/shared/getAddToCartUtil';
 import getCheckCourseToCartUtil from '@/utils/shared/getCheckCourseToCartUtil';
@@ -7,23 +7,30 @@ import getTokenUtil from '@/utils/shared/getTokenUtil';
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
+import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
 import { CircularProgress, Stack } from '@mui/material';
 import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 
-const DetailView = () => {
+import SearchOffIcon from '@mui/icons-material/SearchOff';
+import { STUDENT_URL } from '../../settings/setting.app';
+
+import parse from 'html-react-parser';
+
+const DetailView = (props: any) => {
   /**
    *
    * states
    *
    * **/
   const context = useContext(AppContext);
+  const navigate = useNavigate();
 
   const { courseId } = useParams();
   const [courseDetail, setCourseDetail] = useState<any>(undefined);
   const [isAvaliable, setIsAvaliable] = useState<any | boolean>(undefined);
-
+  const [founded, setFounded] = useState<any>(undefined);
 
   /**
    *
@@ -45,7 +52,10 @@ const DetailView = () => {
           },
         });
         setCourseDetail(res.data.payload);
-      } catch (error) {}
+        setFounded(true);
+      } catch (error) {
+        setFounded(false);
+      }
     };
 
     // check course available for this account
@@ -70,7 +80,7 @@ const DetailView = () => {
           }
         } catch (error) {}
       } else {
-        setIsAvaliable(false)
+        setIsAvaliable(false);
       }
     };
 
@@ -79,9 +89,9 @@ const DetailView = () => {
   }, []);
 
   /**
-   * 
+   *
    * funcs
-   * 
+   *
    * **/
   const _onClickAddToCart = async () => {
     context.setTypeOfDialog('loading');
@@ -108,11 +118,8 @@ const DetailView = () => {
             context.handleOpenAlert();
 
             // Edit item into the cart
-            context.setBadgeCart(context.badgeCart + 1)
-            context.setListOfCart((prev: any) => [
-              ...prev,
-              courseDetail
-            ])            
+            context.setBadgeCart(context.badgeCart + 1);
+            context.setListOfCart((prev: any) => [...prev, courseDetail]);
             context.setTypeOfAlert('success');
             context.setTitleOfAlert('This course was added to cart');
             context.handleCloseDialog();
@@ -126,108 +133,139 @@ const DetailView = () => {
           }
         } catch (error) {}
       }
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   return (
-    <div
-      className="w-full h-max flex bg-white p-4 
+    <>
+      {founded === undefined ? (
+        <Stack sx={{ color: 'grey.500' }} spacing={5} direction="row">
+          <CircularProgress color="inherit" />
+        </Stack>
+      ) : founded === true ? (
+        <div
+          className="w-full h-max flex bg-white p-4 
       md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-4
       shadow-md
     "
-    >
-      {/* Img fields */}
-      <div className="md:w-2/6 h-full">
-        <img src={js} />
-      </div>
-      {/* End img */}
-
-      {/* Detail fields */}
-      <div className="md:w-4/6 h-full flex flex-col space-y-8">
-        {/* Top */}
-        <div className="w-full h-max flex flex-col space-y-2">
-          <p className="text-3xl font-bold">Javascript something of a programming language asdlklas dlkla sd</p>
-          <p className="text-xl text-gray-500">Programming language</p>
-          <p className="text-2xl font-semibold">$99.90</p>
-        </div>
-        {/* End top */}
-
-        {/* Bottom */}
-        <div className="w-full h-max flex flex-col space-y-3">
-          <div className="w-full h-max flex flex-col">
-            <p className="text-lg font-bold text-gray-400">INSTRUCTOR</p>
-            <p className="font-bold text-base">Nguyen Van A</p>
+        >
+          {/* Img fields */}
+          <div className="md:w-2/6 h-full">
+            <img className="w-full" src={courseDetail?.image ? courseDetail?.image : defaultCourse} />
           </div>
+          {/* End img */}
 
-          <div className="w-full h-max flex flex-col">
-            <p className="text-lg font-bold text-gray-400">SUMARY</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus veritatis possimus earum in recusandae
-              repellat quia doloremque eum quod deleniti nobis ducimus dignissimos voluptas ipsum eveniet fuga, odit
-              dolorum iusto!
-            </p>
-          </div>
-
-          <div className="w-full h-max flex flex-col">
-            <p className="text-lg font-bold text-gray-400">DESCRIPTION</p>
-            <p>
-              {' '}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat alias ullam, voluptatem velit minima
-              deserunt nisi tenetur officia est similique quam cupiditate facere cum quisquam ratione, ipsam enim
-              obcaecati aut?Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus veritatis possimus earum
-              in recusandae repellat quia doloremque eum quod deleniti nobis ducimus dignissimos voluptas ipsum eveniet
-              fuga, odit dolorum iusto!
-            </p>
-          </div>
-
-          <div className="w-full h-max flex flex-col">
-            <p className="text-lg font-bold text-gray-400">DURATION</p>
-            <p className="font-semibold">45 hrs</p>
-          </div>
-        </div>
-        {/* End bottom */}
-
-        {/* Pay fields */}
-        <div className="w-full h-max flex space-x-3">
-          {isAvaliable === undefined ? (
-            <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
-              <CircularProgress color="inherit" />
-            </Stack>
-          ) : isAvaliable === true ? (
-            <div className='w-max h-max text-lg text-emerald-600 font-semibold'>
-              <p>This course avaliable in your cart</p>
+          {/* Detail fields */}
+          <div className="md:w-4/6 h-full flex flex-col space-y-8">
+            {/* Top */}
+            <div className="w-full h-max flex flex-col space-y-2">
+              <p className="text-3xl font-bold">{courseDetail?.name}</p>
+              <p className="text-xl text-gray-500">
+                {courseDetail?.categories?.map((item: any, index: any) => (
+                  <React.Fragment key={index}>
+                    {index === courseDetail?.categories?.length - 1 ? (
+                      <>{item?.categoryName}</>
+                    ) : (
+                      <>{item?.categoryName}, </>
+                    )}
+                  </React.Fragment>
+                ))}
+              </p>
+              <p className="text-2xl font-semibold">${courseDetail?.price}</p>
             </div>
-          ) : (
-            <>
-              <button
-                className="
+            {/* End top */}
+
+            {/* Bottom */}
+            <div className="w-full h-max flex flex-col space-y-3">
+              <div className="w-full h-max flex flex-col">
+                <p className="text-lg font-bold text-gray-400">INSTRUCTOR</p>
+                <p className="font-bold text-base">{courseDetail?.account?.fullName}</p>
+              </div>
+
+              <div className="w-full h-max flex flex-col">
+                <p className="text-lg font-bold text-gray-400">SUMARY</p>
+                <p>{courseDetail?.summary}</p>
+              </div>
+
+              <div className="w-full h-max flex flex-col">
+                <p className="text-lg font-bold text-gray-400">DESCRIPTION</p>
+                {parse(courseDetail?.description)}
+              </div>
+
+              <div className="w-full h-max flex flex-col">
+                <p className="text-lg font-bold text-gray-400">DURATION</p>
+                <p className="font-semibold">{courseDetail?.totalDuration} hrs</p>
+              </div>
+            </div>
+            {/* End bottom */}
+
+            {/* Pay fields */}
+            <div className="w-full h-max flex space-x-3">
+              {isAvaliable === undefined || props?.hasBougth === undefined ? (
+                <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
+                  <CircularProgress color="inherit" />
+                </Stack>
+              ) : !props?.hasBougth ? (
+                isAvaliable === true ? (
+                  <div className="w-max h-max text-lg text-emerald-600 font-semibold">
+                    <p>This course avaliable in your cart</p>
+                  </div>
+                ) : (
+                  <>
+                    <button
+                      className="
                 flex items-center space-x-1 text-gray-500 border-[1.5px] border-gray-500
                 p-2 hover:text-white hover:bg-gray-500 transition-all delay-0
               "
-              onClick={_onClickAddToCart}
-              >
-                <AddShoppingCartIcon sx={{ fontSize: 15 }} />
-                <p>Add to cart</p>
-              </button>
+                      onClick={_onClickAddToCart}
+                    >
+                      <AddShoppingCartIcon sx={{ fontSize: 15 }} />
+                      <p>Add to cart</p>
+                    </button>
 
-              <button
-                className="
+                    <button
+                      className="
                 flex items-center bg-emerald-600
                 p-2 text-white hover:bg-emerald-500 transition-all delay-0
               "
-              >
-                <AttachMoneyOutlinedIcon sx={{ fontSize: 15 }} />
-                <p>BUY NOW</p>
-              </button>
-            </>
-          )}
+                    >
+                      <AttachMoneyOutlinedIcon sx={{ fontSize: 15 }} />
+                      <p>BUY NOW</p>
+                    </button>
+                  </>
+                )
+              ) : (
+                <>
+                  <button
+                    className="
+                flex items-center bg-gray-600 space-x-1
+                p-2 text-white hover:bg-gray-500 transition-all delay-0
+              "
+              onClick={() => {
+                navigate(`${STUDENT_URL}/layout/learn/${String(courseId)}`);
+              }}
+                  >
+                    <PlayCircleFilledWhiteOutlinedIcon sx={{ fontSize: 20 }} />
+                    <p>Learn course</p>
+                  </button>
+                </>
+              )}
+            </div>
+            {/* End pay fields */}
+          </div>
+          {/* End detail */}
         </div>
-        {/* End pay fields */}
-      </div>
-      {/* End detail */}
-    </div>
+      ) : (
+        <div
+          className="w-full h-max flex flex-col justify-center items-center
+          text-gray-500
+        "
+        >
+          <SearchOffIcon sx={{ fontSize: 40 }} />
+          <p className="text-lg">The course wasn't found</p>
+        </div>
+      )}
+    </>
   );
 };
 

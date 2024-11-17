@@ -62,7 +62,7 @@ const STUDENT_SUBLIST: RouterModel[] = import.meta.env.VITE_APP != "com.cursus.s
     title: "Shopping Cart"
   },
   {
-    url: STUDENT_URL + "/layout" + "/learn" ,
+    url: STUDENT_URL + "/layout" + "/learn/:courseId" ,
     page: <LearnPage />,
     title: "Learn"
   },

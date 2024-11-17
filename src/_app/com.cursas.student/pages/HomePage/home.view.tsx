@@ -1,10 +1,14 @@
+import { AppContext } from '@/App';
 import CartItemShared from '@/components/shared/student/CartItemShared/cartItem.shared';
 import FilterCourseShared from '@/components/shared/student/FilterCourseShared/filterCourse.shared';
 import FilterFieldsShared from '@/components/shared/student/FilterFieldsShared/filterFields.shared';
 import LoadingSkeletonShared from '@/components/shared/student/LoadingSkeletonShared/loadingSkeleton.shared';
+import getFilterUtil from '@/utils/shared/getFilterCourse';
+import getTokenUtil from '@/utils/shared/getTokenUtil';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 const LoadingJSX = [
   <LoadingSkeletonShared />,
@@ -14,9 +18,8 @@ const LoadingJSX = [
   <LoadingSkeletonShared />,
   <LoadingSkeletonShared />,
   <LoadingSkeletonShared />,
-  <LoadingSkeletonShared />
+  <LoadingSkeletonShared />,
 ];
-
 
 const HomeView = () => {
   /**
@@ -24,6 +27,8 @@ const HomeView = () => {
    * state
    *
    * **/
+  const context = useContext(AppContext);
+
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -55,24 +60,103 @@ const HomeView = () => {
 
     try {
       const callAPI = async () => {
-        const res = await axios.get(url);
+        if (context.filter.category !== 0 || context.filter.courseName !== '') {
+          const token = getTokenUtil();
+          const url = getFilterUtil(currentPage);
 
-        if (metaData === null) {
-          setMetaData(res.data.metadata);
-        }
+          const data = {
+            categoryId: context.filter.category,
+            name: context.filter.courseName,
+          };
 
-        if (courseList === null) {
-          setCourseList(res.data.payload);
-          setIsLoading(false);
+          await axios
+            .post(url, data, {
+              headers: {
+                Accept: '*/*',
+                'Content-Type': 'application/json',
+                Authorization: token,
+              },
+            })
+            .then((_res) => {
+              if (_res.status === 200) {
+                if (_res.data.payload.length !== 0) {
+                  setCourseList(_res.data.payload);
+                  setMetaData(_res.data.metadata);
+                }
+                setIsLoading(false);
+              }
+            });
         } else {
-          setCourseList((prev: any) => [...prev, ...res.data.payload]);
-          setIsLoading(false);
+          const res = await axios.get(url);
+
+          if (metaData === null) {
+            setMetaData(res.data.metadata);
+          }
+
+          if (courseList === null) {
+            setCourseList(res.data.payload);
+            setIsLoading(false);
+          } else {
+            setCourseList((prev: any) => [...prev, ...res.data.payload]);
+            setIsLoading(false);
+          }
         }
       };
 
       callAPI();
     } catch (error: any) {}
   }, [currentPage]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setCurrentPage(1);
+
+    try {
+      const callAPI = async () => {
+        if (context.filter.category !== 0 || context.filter.courseName !== '') {
+          const token = getTokenUtil();
+          const url = getFilterUtil(currentPage);
+
+          const data = {
+            categoryId: context.filter.category,
+            name: context.filter.courseName,
+          };
+
+          await axios
+            .post(url, data, {
+              headers: {
+                Accept: '*/*',
+                'Content-Type': 'application/json',
+                Authorization: token,
+              },
+            })
+            .then((_res) => {
+              if (_res.status === 200) {
+                setCourseList(_res.data.payload);
+                setMetaData(_res.data.metadata);
+                setIsLoading(false);
+              }
+            });
+        } else {
+          const url = import.meta.env.VITE_DB + `/api/courses/all?currentPage=${currentPage}&size=12`;
+          const res = await axios.get(url);
+
+          setMetaData(res.data.metadata);
+
+          if (courseList === null) {
+            setCourseList(res.data.payload);
+            setIsLoading(false);
+          } else {
+            setCourseList(res.data.payload);
+            setIsLoading(false);
+          }
+          setIsLoading(false);
+        }
+      };
+
+      callAPI();
+    } catch (error) {}
+  }, [context.filter]);
 
   /**
    *
@@ -97,8 +181,19 @@ const HomeView = () => {
       {/* Main screen */}
       <div className="w-full h-max flex flex-col space-y-10 items-center">
         {/* Filter */}
-        <div className="w-full h-max">
+        <div className="w-full h-max flex space-x-3">
           <FilterCourseShared {...filterProps} />
+          <button
+            className="bg-gray-300 text-black px-2 py-0.5 hover:bg-gray-200
+            items-center space-x-1 flex
+          "
+            onClick={() => {
+              window.location.reload()
+            }}
+          >
+            <RefreshOutlinedIcon sx={{ fontSize: 15 }} />
+            <p>Reset</p>
+          </button>
         </div>
         {/* End filter */}
 
@@ -120,7 +215,7 @@ const HomeView = () => {
         </div>
 
         {/* View more button */}
-        {currentPage === metaData?.totalPages ? (
+        {currentPage >= metaData?.totalPages ? (
           <></>
         ) : (
           <button

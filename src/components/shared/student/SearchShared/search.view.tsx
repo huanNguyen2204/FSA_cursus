@@ -1,6 +1,7 @@
 import { AppContext } from '@/App';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const SearchView = () => {
   /**
@@ -11,6 +12,7 @@ const SearchView = () => {
   const context = useContext(AppContext);
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
+  const navigate = useNavigate();
 
   /**
    * 
@@ -74,6 +76,7 @@ const SearchView = () => {
             ...prev,
             courseName: text
           }))
+          navigate("/cursus-student/layout/");
         }}
       >
         Search

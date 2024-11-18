@@ -13,6 +13,7 @@ import LearnPage from "../pages/LearnPage/learn.page";
 import RegisterPage from "../pages/RegisterPage/register.page";
 import PaymentHistoryPage from "../pages/PaymentHistoryPage/paymentHistory.page";
 import MyCoursePage from "../pages/MyCoursePage/myCourse.page";
+import ErrorPage from "../pages/ErrorPage/error.page";
 
 // Str for url router
 const STUDENT_URL = "/cursus-student";
@@ -65,6 +66,11 @@ const STUDENT_SUBLIST: RouterModel[] = import.meta.env.VITE_APP != "com.cursus.s
     url: STUDENT_URL + "/layout" + "/learn/:courseId" ,
     page: <LearnPage />,
     title: "Learn"
+  },
+  {
+    url: STUDENT_URL + "/layout" + "/error" ,
+    page: <ErrorPage />,
+    title: "Error"
   },
 ]
 

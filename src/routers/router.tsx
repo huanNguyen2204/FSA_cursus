@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // Components importing
 // import ScrollToTop from '@/components/shared/ScrollToTop/scrollToTop';
 import { ENV_URL, ENV_LAYOUT, ENV_FIRSTCOME, ENV_SUBLIST, ENV_OTHERLIST } from './env/envs';
+import { STUDENT_URL } from '@/_app/com.cursas.student/settings/setting.app';
 
 const Routers = () => {
   return (
@@ -26,6 +27,9 @@ const Routers = () => {
 
         {/* Setting FIRSTCOME */}
         <Route path={ENV_FIRSTCOME?.url} element={ENV_FIRSTCOME?.page} />
+
+        {/* Error page */}
+        <Route path='*' element={<Navigate to={`${STUDENT_URL}/layout/error`} />} />
       </Routes>
     </BrowserRouter>
   );

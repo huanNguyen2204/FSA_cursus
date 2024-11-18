@@ -1,26 +1,34 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
-import Routers from "./routers/router";
-import SnackBarShared from "./components/shared/student/SnackBarShared/snackBar.shared";
-import DialogShared from "./components/shared/student/DialogShared/diaLog.shared";
-// create the context 
+import Routers from './routers/router';
+import SnackBarShared from './components/shared/student/SnackBarShared/snackBar.shared';
+import DialogShared from './components/shared/student/DialogShared/diaLog.shared';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+// create the context
 export const AppContext = createContext<any>(null);
+
+const THEME = createTheme({
+  typography: {
+    fontFamily: `"Source Sans 3", "Helvetica", "Arial", sans-serif`,
+  },
+});
 
 const App = () => {
   /**
-   * 
+   *
    * states
-   * 
+   *
    * **/
-  
+
   // alert toastify
-  const [openAlert, setOpenAlert] = useState<boolean>(false)
-  const [typeOfAlert, setTypeOfAlert] = useState<string>("");
-  const [titleOfAlert, setTitleOfAlert] = useState<string>("");
+  const [openAlert, setOpenAlert] = useState<boolean>(false);
+  const [typeOfAlert, setTypeOfAlert] = useState<string>('');
+  const [titleOfAlert, setTitleOfAlert] = useState<string>('');
 
   // dialog modal
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const [typeOfDialog, setTypeOfDialog] = useState<string>("");
+  const [typeOfDialog, setTypeOfDialog] = useState<string>('');
   const [paramsDiaglog, setParamsDialog] = useState<any>();
 
   // badge cart header
@@ -30,7 +38,7 @@ const App = () => {
   // category
   const [filter, setFilter] = useState<any>({
     category: 0,
-    courseName: ""
+    courseName: '',
   });
   const [isChangeFilter, setIsChangeFilter] = useState<boolean>(false);
 
@@ -40,22 +48,22 @@ const App = () => {
 
   // dialog funcs
   const handleOpenDialog = () => setOpenDialog(true);
-  const handleCloseDialog = () => setOpenDialog(false);  
-  const handleTypeOfDialog = (type: string) => setTypeOfDialog(type)
-  const handleParamsDialog = (params: any) => setParamsDialog(params) 
+  const handleCloseDialog = () => setOpenDialog(false);
+  const handleTypeOfDialog = (type: string) => setTypeOfDialog(type);
+  const handleParamsDialog = (params: any) => setParamsDialog(params);
 
   /**
-   * 
+   *
    * export props
-   * 
+   *
    * **/
   const snackBarProps = {
     openAlert,
     typeOfAlert,
     titleOfAlert,
     handleOpenAlert,
-    handleCloseAlert
-  }
+    handleCloseAlert,
+  };
 
   const diaLogProps = {
     openDialog,
@@ -63,54 +71,58 @@ const App = () => {
     paramsDiaglog,
     handleCloseDialog,
     handleOpenDialog,
-    handleTypeOfDialog
-  }
+    handleTypeOfDialog,
+  };
 
   return (
-    <AppContext.Provider value={{
-      // alert
-      openAlert, 
-      setTypeOfAlert,
-      setTitleOfAlert,
-      handleOpenAlert,
-      handleCloseAlert,
+    <ThemeProvider theme={THEME}>
+      <AppContext.Provider
+        value={{
+          // alert
+          openAlert,
+          setTypeOfAlert,
+          setTitleOfAlert,
+          handleOpenAlert,
+          handleCloseAlert,
 
-      // dialog
-      typeOfDialog,
-      setTypeOfDialog,
-      handleOpenDialog,
-      handleCloseDialog,
-      diaLogProps,
-      handleParamsDialog,
+          // dialog
+          typeOfDialog,
+          setTypeOfDialog,
+          handleOpenDialog,
+          handleCloseDialog,
+          diaLogProps,
+          handleParamsDialog,
 
-      // cart
-      badgeCart,
-      listOfCart,
-      setBadgeCart,
-      setListOfCart,
+          // cart
+          badgeCart,
+          listOfCart,
+          setBadgeCart,
+          setListOfCart,
 
-      // category
-      filter,
-      setFilter,
+          // category
+          filter,
+          setFilter,
 
-      // filter
-      isChangeFilter,
-      setIsChangeFilter,
-    }}>  
-      {/* Page components */}
-      <div className="flex xl:text-sm text-xs">
-        {/* MAIN OF ROUTER */}
-        <Routers />
+          // filter
+          isChangeFilter,
+          setIsChangeFilter,
+        }}
+      >
+        {/* Page components */}
+        <div className="flex xl:text-sm text-xs">
+          {/* MAIN OF ROUTER */}
+          <Routers />
 
-        {/* Sub component */}
-        {/* Loading and toastify */}
-        <SnackBarShared {...snackBarProps} />
+          {/* Sub component */}
+          {/* Loading and toastify */}
+          <SnackBarShared {...snackBarProps} />
 
-        {/* Modal */}
-        <DialogShared {...diaLogProps} />
-      </div>
-      {/* End page components */}
-    </AppContext.Provider>
+          {/* Modal */}
+          <DialogShared {...diaLogProps} />
+        </div>
+        {/* End page components */}
+      </AppContext.Provider>
+    </ThemeProvider>
   );
 };
 

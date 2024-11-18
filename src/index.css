@@ -11,6 +11,6 @@ body {
 }
 
 /* Hidden outline when focus input */
-input:focus {
+input:focus, textarea:focus {
   outline: none;
 }

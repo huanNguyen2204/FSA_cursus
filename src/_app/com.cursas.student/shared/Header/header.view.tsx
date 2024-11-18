@@ -1,7 +1,6 @@
 // import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 
@@ -12,6 +11,7 @@ import { STUDENT_URL } from '../../settings/setting.app';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '@/App';
 import Badge from '@mui/material/Badge';
+import DrawerShared from '@/components/shared/student/DrawerShared/drawer.shared';
 
 const HeaderView = (_props: any) => {
   /**
@@ -44,16 +44,16 @@ const HeaderView = (_props: any) => {
       {/* Fields */}
       <div className="w-[80rem] h-full flex items-center xl:space-x-5">
         {/* Logo */}
-        <button className="w-max xl:h-max h-full">
+        <div className="w-max xl:h-max h-full hover:cursor-pointer">
           <img
             className="w-[10rem] h-[35px] xl:flex hidden"
             src={logo}
             onClick={() => navigate(STUDENT_URL + '/layout/')}
           />
           <div className="w-[4rem] h-full xl:hidden flex justify-center items-center text-gray-400 hover:text-emerald-600 transition-colors delay-0">
-            <MenuOutlinedIcon sx={{ fontSize: 30 }} />
+            <DrawerShared />
           </div>
-        </button>
+        </div>
         {/* End logo */}
 
         {/* Options fields */}

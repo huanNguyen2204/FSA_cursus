@@ -52,7 +52,7 @@ const Content = (props: any) => {
               borderColor: appConfig.admin.borderColor,
             }}
           >
-            <p>Copyright © 2024 Cursus. All rights reserved.</p>
+            <p>Copyright © 2024 Cursus - FPT Academy. All rights reserved.</p>
           </div>
         </div>
         {/* End Footer */}

@@ -10,6 +10,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LogoutDiagLogShared from './types/LogoutDialogShared/logoutDialog.shared';
 import LoadingDiagGlobalShared from './types/LoadingDialogGlobalShared/loadingDialogGlobal.shared';
 import PurchaseConfirmDiaglogShared from './types/PurchaseConfirmDiaglogShared/purchaseConfirmDiaglog.shared';
+import FeedbackDialogShared from './types/FeedbackDialogShared/feedbackDiaglog.shared';
+import BuyNowDialogShared from './types/BuyNowDialogShared/buyNowDialog.shared';
 
 const theme = createTheme({
   components: {
@@ -49,7 +51,11 @@ export default function DialogView(props: any) {
           <LoadingDiagGlobalShared {...props} />
         ) : props.typeOfDialog === 'purchase' ? (
           <PurchaseConfirmDiaglogShared {...props} />
-        ) : (
+        ) : props.typeOfDialog === 'feedback' ? (
+          <FeedbackDialogShared {...props} />
+        ) : props.typeOfDialog === 'buynow' ? (
+          <BuyNowDialogShared {...props} />
+        ) :(
           <></>
         )}
       </>
@@ -64,6 +70,7 @@ export default function DialogView(props: any) {
           onClose={handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
+          sx={{ fontFamily: "Source Sans 3" }}
         >
           <DialogJSX />
         </Dialog>
